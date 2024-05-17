@@ -1,0 +1,35 @@
+#include <iostream>
+#include<queue>
+#include<string>
+#include<vector>
+#include<sstream>
+using namespace std;
+
+void processCustomers(queue<string>& customers)
+{
+    while (customers.size())
+    {
+        cout << customers.front() << endl;
+        customers.pop();
+    }
+}
+
+int main()
+{
+    queue<string> customers;
+    string name;
+
+    while (true)
+    {
+        cin >> name;
+
+        if (name == "End") break;
+
+        else if (name == "Paid") processCustomers(customers);
+        else customers.push(name);
+    }
+
+    cout << customers.size() << " people remaining." << endl;
+    
+    return 0;
+}
