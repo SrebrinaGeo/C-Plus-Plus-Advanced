@@ -1,0 +1,38 @@
+#include <iostream>
+#include<queue>
+#include<string>
+#include<vector>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    string line;
+    getline(cin, line);
+
+    istringstream istr(line);
+
+    queue<int> numbers;
+    int num;
+    while (istr >> num) numbers.push(num);
+
+    bool isFirst = true;
+    while (numbers.size())
+    {
+        int currentNum = numbers.front(); numbers.pop();
+        if (currentNum % 2 == 0)
+        {
+            if (!isFirst) cout << ", ";
+
+            else
+            {
+                isFirst = false;
+            }
+            cout << currentNum;
+        }
+    }
+
+    cout << endl;
+
+    return 0;
+}
