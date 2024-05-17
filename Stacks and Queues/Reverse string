@@ -1,0 +1,25 @@
+#include <iostream>
+#include<string>
+#include<stack>
+using namespace std;
+
+int main()
+{
+    string input;
+    getline(cin, input);
+
+    stack<char> result;
+    string::iterator itS = input.begin();
+
+    for (; itS != input.end(); itS++) result.push(*itS);
+
+    while (!result.empty())
+    {
+        cout << result.top();
+        result.pop();
+    }
+
+    cout << endl;
+
+    return 0;
+}
