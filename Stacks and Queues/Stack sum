@@ -1,0 +1,59 @@
+#include <iostream>
+#include<stack>
+#include<string>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    string input;
+    getline(cin, input);
+
+    istringstream istr(input);
+    int currentNum;
+
+    stack<int> numbers;
+
+    while (istr >> currentNum) numbers.push(currentNum);
+
+    while (true)
+    {
+        getline(cin, input);
+        if (input == "end") break;
+
+        istringstream istr(input);
+
+        string command;
+        istr >> command;
+
+        if (command == "add")
+        {
+            int n1, n2;
+            istr >> n1 >> n2;
+
+            numbers.push(n1); numbers.push(n2);
+        }
+
+        else if (command == "remove")
+        {
+            int n;
+            istr >> n;
+
+            if (n <= numbers.size())
+            {
+                while (n--) numbers.pop();
+            }
+        }
+    }
+
+    int sum = 0;
+    while (numbers.size())
+    {
+        sum += numbers.top();
+        numbers.pop();
+    }
+
+    cout << sum << endl;
+
+    return 0;
+}
