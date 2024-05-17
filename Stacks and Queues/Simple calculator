@@ -1,0 +1,47 @@
+#include <iostream>
+#include<sstream>
+#include<stack>
+#include<string>
+using namespace std;
+
+int main()
+{
+    string expression;
+    getline(cin, expression);
+
+    istringstream istr(expression);
+
+    stack<int> numbers;
+    stack<char> operations;
+
+    int operand;
+    while (istr >> operand)
+    {
+        numbers.push(operand);
+
+        char oper;
+
+        if (istr >> oper) operations.push(oper);
+        else break;
+    }
+
+    int sum = 0;
+
+    while (operations.size())
+    {
+        char c = operations.top(); operations.pop();
+        int number = numbers.top(); numbers.pop();
+
+        switch (c)
+        {
+        case '+': sum += number; break;
+        case '-': sum -= number; break;
+        }
+    }
+
+    if (numbers.size()) sum += numbers.top();
+
+    cout << sum << endl;
+
+    return 0;
+}
