@@ -1,0 +1,37 @@
+#include <iostream>
+#include<queue>
+#include<string>
+#include<vector>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    queue<string> players;
+
+    string name;
+    getline(cin, name);
+    istringstream istr(name);
+
+    while (istr >> name) players.push(name);
+
+    int moves;
+    cin >> moves;
+
+    int remainingMoves = moves;
+    while (players.size() > 1)
+    {
+        string currPlayer = players.front();
+        players.pop(); remainingMoves--;
+
+        if (remainingMoves == 0)
+        {
+            cout << "Removed " << currPlayer << endl; remainingMoves = moves;
+        }
+        else players.push(currPlayer);
+    }
+
+    cout << "Last is " << players.front() << endl;
+
+    return 0;
+}
