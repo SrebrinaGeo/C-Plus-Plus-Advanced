@@ -1,0 +1,27 @@
+#include <iostream>
+#include<string>
+#include<sstream>
+#include<stack>
+using namespace std;
+
+int main()
+{
+    string line;
+    getline(cin, line);
+
+    stack<size_t> openBrackets;
+
+    for (size_t idx = 0; idx < line.length(); idx++)
+    {
+        char currChr = line[idx];
+        if (currChr == '(') openBrackets.push(idx);
+        else if (currChr == ')')
+        {
+            size_t openBracketIdx = openBrackets.top(); openBrackets.pop();
+            string inner = line.substr(openBracketIdx, idx - openBracketIdx + 1);
+
+            cout << inner << endl;
+        }
+    }
+    return 0;
+}
