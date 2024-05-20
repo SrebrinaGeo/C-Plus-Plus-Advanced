@@ -1,0 +1,57 @@
+#include <iostream>
+#include<string>
+#include<sstream>
+#include<queue>
+using namespace std;
+
+bool checkFullCircle(queue<int> fuelInCurr, queue<int> distance)
+{
+    int fuel = 0;
+
+    while (fuelInCurr.size())
+    {
+        int currFuel = fuelInCurr.front();
+        fuel += currFuel;
+        if (fuel >= distance.front())
+        {
+            fuel -= distance.front();
+        }
+        else break;
+
+        fuelInCurr.pop();
+        distance.pop();
+    }
+    
+    return fuelInCurr.size() == 0;
+}
+
+
+int main()
+{
+    queue<int> fuelInCurr;
+    queue<int> distance;
+
+    int n;
+    cin >> n;
+
+    while (n--)
+    {
+        int current;
+        cin >> current; fuelInCurr.push(current);
+        cin >> current; distance.push(current);
+    }
+
+    n = 0;
+    while (n <= fuelInCurr.size())
+    {
+        if (checkFullCircle(fuelInCurr, distance)) break;
+
+        n++;
+        fuelInCurr.push(fuelInCurr.front()); fuelInCurr.pop();
+        distance.push(distance.front()); distance.pop();
+    }
+
+    cout << n << endl;
+
+    return 0;
+}
