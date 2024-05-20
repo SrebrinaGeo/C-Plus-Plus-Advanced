@@ -1,0 +1,59 @@
+#include <iostream>
+#include<string>
+#include<sstream>
+#include<stack>
+using namespace std;
+
+bool checkValidParenth(stack<char>& parentheses, char expected)
+{
+    if (parentheses.size() == 0)
+        return false;
+    if (parentheses.top() != expected)
+        return false;
+
+    parentheses.pop();
+    return true;
+}
+
+int main()
+{
+    string sequence;
+    getline(cin, sequence);
+
+    stack<char> parentheses;
+    bool isValid = true;
+
+    string::iterator itS = sequence.begin();
+    for(; isValid && itS != sequence.end(); itS++)
+    {
+        switch (*itS)
+        {
+        case'(':
+        case'[':
+        case'{':
+            parentheses.push(*itS);
+            break;
+        case')':
+            if (!checkValidParenth(parentheses, '('))
+                isValid = false;
+            break;
+        case']':
+            if (!checkValidParenth(parentheses, '['))
+                isValid = false;
+            break;
+        case'}':
+            if (!checkValidParenth(parentheses, '{'))
+                isValid = false;
+            break;
+        }
+    }
+
+    if (isValid && !parentheses.empty())
+    {
+        isValid = false;
+    }
+
+    cout << (isValid ? "YES" : "NO") << endl;
+
+    return 0;
+}
