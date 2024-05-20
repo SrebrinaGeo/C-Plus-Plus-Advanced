@@ -1,0 +1,54 @@
+#include <iostream>
+#include<climits>
+#include<queue>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    int foodQuantity;
+    cin >> foodQuantity;
+    cin.ignore();
+
+    queue<int> orders;
+    int maxOrder = 0;
+    int currOrder;
+
+    string input;
+    getline(cin, input);
+    istringstream orderStream(input);
+
+    int current;
+    while (orderStream >> current)
+    {
+        if (current > maxOrder) maxOrder = current;
+        orders.push(current);
+    }
+
+    cout << maxOrder << endl;
+
+    while (orders.size() != 0 && foodQuantity >= orders.front())
+    {
+        foodQuantity -= orders.front();
+        orders.pop();
+    }
+
+    if (orders.size() == 0)
+    {
+        cout << "Orders complete" << endl;
+    }
+
+    else
+    {
+        cout << "Orders left: ";
+        while (orders.size())
+        {
+            cout << orders.front() << " ";
+            orders.pop();
+        }
+    }
+
+    cout << endl;
+
+    return 0;
+}
