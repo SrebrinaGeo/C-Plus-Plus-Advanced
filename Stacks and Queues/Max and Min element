@@ -1,0 +1,89 @@
+#include <iostream>
+#include<stack>
+#include<climits>
+using namespace std;
+
+int maxElm(stack<int> numbers)
+{
+    if (numbers.size() == 0) return INT_MIN;
+
+    int maxEl = numbers.top(); numbers.pop();
+
+    while (numbers.size())
+    {
+        if (numbers.top() > maxEl) maxEl = numbers.top();
+        numbers.pop();
+    }
+
+    return maxEl;
+}
+
+int minElm(stack<int> numbers)
+{
+    if (numbers.size() == 0) return INT_MIN;
+
+    int minEl = numbers.top(); numbers.pop();
+
+    while (numbers.size())
+    {
+        if (numbers.top() < minEl) minEl = numbers.top();
+        numbers.pop();
+    }
+
+    return minEl;
+}
+
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    stack<int> numbers;
+
+    while (n--)
+    {
+        int command;
+        cin >> command;
+        int num;
+
+        switch (command)
+        {
+        case 1:
+            cin >> num;
+            numbers.push(num);
+            break;
+        case 2:
+            if (numbers.size()) numbers.pop(); break;
+        case 3:
+            if (numbers.size())
+            {
+                cout << maxElm(numbers) << endl;
+            }
+            break;
+        case 4:
+            if (numbers.size())
+            {
+                cout << minElm(numbers) << endl;
+            }
+            break;
+        default: cout << "Invalid command" << endl;
+        }
+
+    }
+
+    bool isFirst = true;
+    while (numbers.size())
+    {
+        if (isFirst)
+            isFirst = false;
+        else
+            cout << ", ";
+        cout << numbers.top();
+        numbers.pop();
+    }
+
+    cout << endl;
+
+    return 0;
+}
