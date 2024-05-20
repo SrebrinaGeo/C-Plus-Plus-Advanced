@@ -1,0 +1,43 @@
+#include <iostream>
+#include<stack>
+#include<climits>
+#include<stack>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    int n, s, x;
+    cin >> n >> s >> x;
+
+    stack<int> numbers;
+
+    while(n--)
+    {
+        int num;
+        cin >> num;
+        numbers.push(num);
+    }
+
+    while(s--) numbers.pop();
+
+    int smallest = INT_MAX;
+
+    if (numbers.size() == 0) smallest = 0;
+
+    while(numbers.size())
+    {
+        int top = numbers.top(); numbers.pop();
+        if (top == x)
+        {
+            cout << "true" << endl;
+            return 0;
+        }
+
+        if (smallest > top) smallest = top;
+    }
+
+    cout << smallest;
+    
+    return 0;
+}
