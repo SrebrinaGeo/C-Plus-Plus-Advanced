@@ -1,0 +1,41 @@
+#include <iostream>
+#include<queue>
+#include<climits>
+using namespace std;
+
+int main()
+{
+    int n, s, x;
+    cin >> n >> s >> x;
+
+    queue<int> numbers;
+
+    for (size_t cntr = 0; cntr < n; cntr++)
+    {
+        int num;
+        cin >> num;
+        numbers.push(num);
+    }
+
+    while (s--) numbers.pop();
+
+    int smallest = INT_MAX;
+
+    if (numbers.size() == 0) smallest = 0;
+
+    while (numbers.size())
+    {
+        int front = numbers.front(); numbers.pop();
+        if (front == x)
+        {
+            cout << "true" << endl;
+            return 0;
+        }
+
+        if (smallest > front) smallest = front;
+    }
+
+    cout << smallest;
+
+    return 0;
+}
