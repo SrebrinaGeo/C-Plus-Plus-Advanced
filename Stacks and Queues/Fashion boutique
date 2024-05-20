@@ -1,0 +1,47 @@
+#include <iostream>
+#include<string>
+#include<stack>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    stack<int> rack;
+
+    string clothes;
+    getline(cin, clothes);
+    istringstream istr(clothes);
+
+    int current;
+    while (istr >> current) rack.push(current);
+
+    int rackCapacity;
+    cin >> rackCapacity;
+
+    int racks = 1;
+    int currentRackCapacity = rackCapacity;
+
+    while (rack.size())
+    {
+        current = rack.top();
+        rack.pop();
+
+        if (current <= currentRackCapacity)
+        {
+            currentRackCapacity -= current;
+        }
+
+        else
+        {
+            racks++;
+            currentRackCapacity = rackCapacity;
+            currentRackCapacity -= current;
+        }
+
+    }
+
+    cout << racks << endl;
+
+    return 0;
+
+}
