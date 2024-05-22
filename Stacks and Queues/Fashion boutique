@@ -43,5 +43,4 @@ int main()
     cout << racks << endl;
 
     return 0;
-
 }
