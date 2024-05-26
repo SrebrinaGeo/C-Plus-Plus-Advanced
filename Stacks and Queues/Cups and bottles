@@ -1,0 +1,64 @@
+#include <iostream>
+#include<stack>
+#include<queue>
+#include<sstream>
+using namespace std;
+
+int main()
+{
+    string cups_line;
+    getline(cin, cups_line);
+    istringstream istr_cups(cups_line);
+
+    queue<int> cups;
+    int currCup;
+    while (istr_cups >> currCup) cups.push(currCup);
+
+    string bottles_line;
+    getline(cin, bottles_line);
+    istringstream istr_bottles(bottles_line);
+
+    stack<int> bottles;
+    int currBottle;
+    while (istr_bottles >> currBottle) bottles.push(currBottle);
+
+    int wasted_Water = 0;
+
+    while (!cups.empty() && !bottles.empty())
+    {
+        int currentCup = cups.front();
+        while (currentCup > 0)
+        {
+            int currentBottle = bottles.top();
+            bottles.pop();
+            currentCup -= currentBottle;
+            if(currentCup < 0) wasted_Water -= currentCup;
+        }
+        cups.pop();
+    }
+
+    if (cups.empty())
+    {
+        cout << "Bottles: ";
+        while (!bottles.empty())
+        {
+            cout << bottles.top() << " ";
+            bottles.pop();
+        }
+        cout << endl;
+    }
+    else if (bottles.empty())
+    {
+        cout << "Cups: ";
+        while (!cups.empty())
+        {
+            cout << cups.front() << " ";
+            cups.pop();
+        }
+        cout << endl;
+    }
+
+    cout << "Wasted litters of water: " << wasted_Water << endl;
+         
+    return 0;
+}
