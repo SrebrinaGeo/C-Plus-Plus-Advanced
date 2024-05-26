@@ -1,0 +1,28 @@
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <string>
+#include <vector>
+using namespace std;
+
+
+int main()
+{
+    map<double, unsigned> occurrences;
+    vector<double> order;
+
+    string line;
+    getline(cin, line);
+    istringstream istr(line);
+
+    double current;
+    while (istr >> current)
+    {
+        if (occurrences.find(current) == occurrences.end()) order.push_back(current);
+        occurrences[current]++;
+    }
+  
+    for (double val : order) cout << val << " - " << occurrences[val] << " times" << endl;
+
+    return 0;
+}
