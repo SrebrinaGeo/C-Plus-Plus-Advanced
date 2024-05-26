@@ -1,0 +1,52 @@
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <vector>
+#include <set>
+using namespace std;
+
+
+int main()
+{
+    map < string, map<string, set<string> >> data;
+
+    int n;
+    cin >> n;
+
+    while (n--)
+    {
+        string continent, country, city;
+        cin >> continent >> country >> city;
+
+        data[continent][country].insert(city);
+    }
+
+    for(map< string, map<string, set<string> >>::iterator itContinents = data.begin(); itContinents != data.end(); itContinents++)
+    {
+        cout << itContinents->first << ":" << endl;
+
+        map<string, set<string> >& countries = itContinents->second;
+
+        for (map<string, set<string>> ::iterator itCountries = countries.begin(); itCountries != countries.end(); itCountries++)
+        {
+            cout << "  " << itCountries->first << " -> "; 
+
+            set<string>& cities = itCountries->second;
+
+            bool isFirst = true;
+            for (string city : cities)
+            {
+                if (!isFirst) cout << ", ";
+                else
+                {
+                    isFirst = false;
+                }
+                cout << city;
+            }
+         	cout << endl;
+        }
+    }
+
+    return 0;
+}
+    
