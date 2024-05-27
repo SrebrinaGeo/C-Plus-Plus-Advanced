@@ -1,0 +1,49 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <map>
+#include <set>
+using namespace std;
+
+int main()
+{
+    set<string> parkingLot;
+
+    while (1)
+    {
+        string row;
+        getline(cin, row);
+        if (row == "END") break;
+
+        istringstream istr(row);
+
+        string command;
+        string regist;
+
+        getline(istr, command, ',');
+        istr >> regist;
+
+        if (command == "IN") 
+        {
+            parkingLot.insert(regist);
+        }
+        else if (command == "OUT")
+        {
+            parkingLot.erase(regist);
+        }
+    }
+
+    if (parkingLot.empty())
+    {
+        cout << "Parking Lot is Empty" << endl;
+    }
+    else
+    {
+        for (const string& reg : parkingLot)
+        {
+            cout << reg << endl;
+        }
+    }
+
+    return 0;
+}
