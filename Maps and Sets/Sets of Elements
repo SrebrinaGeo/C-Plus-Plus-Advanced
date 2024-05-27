@@ -1,0 +1,34 @@
+#include <iostream>
+#include<set>
+#include<sstream>
+using namespace std;
+
+void readSet(int n, set<int>& s)
+{
+    while (n--)
+    {
+        int n;
+        cin >> n;
+        s.insert(n);
+    }
+}
+
+int main()
+{
+    int n, m;
+  	cin >> n >> m;
+  
+    set<int> N, M;
+
+    readSet(n, N);
+    readSet(m, M);
+
+    for (int firstSet : N)
+    {
+        if (M.find(firstSet) != M.end()) cout << firstSet << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
