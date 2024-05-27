@@ -6,7 +6,6 @@
 #include <iomanip>
 using namespace std;
 
-
 int main()
 {
     map<string, vector<double> > data;
