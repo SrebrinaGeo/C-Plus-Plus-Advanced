@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <queue>
+#include <map>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    set<string> names;
+    queue<string> printNames;
+
+    while (n--)
+    {
+        string name;
+        cin >> name;
+
+        names.insert(name).second;
+    }
+
+    for(set<string>::iterator it = names.begin(); it != names.end(); it++)
+    {
+        cout << *(it) << endl;
+    }
+
+    return 0;
+}
