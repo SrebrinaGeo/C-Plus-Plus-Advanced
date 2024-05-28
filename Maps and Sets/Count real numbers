@@ -1,0 +1,22 @@
+#include <iostream>
+#include <map>
+#include <string>
+#include <sstream>
+using namespace std;
+
+
+int main()
+{
+	map<double, unsigned> numbers;
+
+	string input;
+	getline(cin, input);
+	istringstream istr(input);
+
+	double num;
+	while (istr >> num) numbers[num]++;
+
+	for (pair<double, unsigned> current : numbers) cout << current.first << " -> " << current.second << endl;
+
+	return 0;
+}
