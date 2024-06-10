@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include <set>
+#include <sstream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    string line; 
+    getline(cin, line);
+
+    transform(line.begin(), line.end(), line.begin(), ::tolower);
+
+    vector<string> order;
+    set<string> words;
+
+    istringstream istr(line);
+    string word;
+    while (istr >> word)
+    {
+        if (find(order.begin(), order.end(), word) == order.end()) order.push_back(word);
+
+        auto it = words.find(word);
+        if (it != words.end()) words.erase(it);
+        else words.insert(word);
+    }
+
+    bool isFirst = true;
+    for (string word : order)
+    {
+        if (words.count(word))
+        {
+            if (isFirst) isFirst = false;
+            else cout << ", ";
+            cout << word;
+        }
+    }
+
+    cout << endl; 
+
+    return 0;
+}
