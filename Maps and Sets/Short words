@@ -1,0 +1,36 @@
+#include <iostream>
+#include <utility>
+#include <algorithm>
+#include <set>
+#include <string>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+    string line;
+    getline(cin, line);
+
+    transform(line.begin(), line.end(), line.begin(), ::tolower);
+
+    set<string> shortWords;
+
+    istringstream istr(line);
+    string word;
+    while (istr >> word)
+    {
+        if (word.length() < 5) shortWords.insert(word);
+    }
+
+    bool isFirst = true;
+    for (string word : shortWords)
+    {
+        if (isFirst) isFirst = false;
+        else cout << ", ";
+        cout << word;
+    }
+
+    cout << endl;
+
+    return 0;
+}
