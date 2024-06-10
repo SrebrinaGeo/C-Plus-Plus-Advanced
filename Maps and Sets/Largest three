@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+    string line;
+    getline(cin, line);
+
+    istringstream istr(line);
+    set<double, greater<double> > numbers;
+
+    double current;
+    while (istr >> current) numbers.insert(current);
+
+    int count = 3;
+    set<double>::iterator itS = numbers.begin();
+    while (count-- && itS != numbers.end())
+    {
+        cout << *itS << " ";
+        itS++;
+    }
+
+
+    return 0;
+}
