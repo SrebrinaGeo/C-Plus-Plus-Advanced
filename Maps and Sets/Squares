@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <sstream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    string line;
+    getline(cin, line);
+
+    istringstream istr(line);
+    multiset<int, greater<int>> numbers;
+
+    int curr;
+    while (istr >> curr)
+    {
+        double sqr = sqrt(curr);
+        if ((int)sqr * int(sqr) == curr) numbers.insert(curr);
+    }
+
+
+    for (int curr : numbers) cout << curr << ' ';
+
+    cout << endl;
+
+    return 0;
+}
