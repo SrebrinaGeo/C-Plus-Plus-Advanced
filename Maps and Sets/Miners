@@ -1,0 +1,34 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <string>
+using namespace std;
+
+
+int main()
+{
+    map<string, int> resources;
+    vector<string> order;
+
+    string name;
+    cin >> name;
+    while (name != "stop")
+    {
+        int quantity;
+        cin >> quantity;
+
+        auto itI = resources.find(name);
+        if (itI != resources.end()) itI->second += quantity;
+        else
+        {
+            resources[name] = quantity;
+            order.push_back(name);
+        }
+        cin >> name;
+    }
+
+
+    for (string curr : order) cout << curr << " -> " << resources[curr] << endl;
+
+    return 0;
+}
