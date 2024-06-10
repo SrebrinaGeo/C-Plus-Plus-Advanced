@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+    string line;
+    getline(cin, line);
+
+    istringstream istr(line);
+    multiset<int> numbers;
+
+    int curr;
+    while (istr >> curr) numbers.insert(curr);
+
+    bool isFirst = true;
+    multiset<int>::iterator itC = numbers.begin();
+    while (itC != numbers.end())
+    {
+        if (isFirst) isFirst = false;
+        else cout << " <= ";
+        cout << *itC;
+        itC++;
+    }
+
+    cout << endl;
+    return 0;
+}
