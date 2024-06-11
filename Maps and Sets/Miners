@@ -27,7 +27,6 @@ int main()
         cin >> name;
     }
 
-
     for (string curr : order) cout << curr << " -> " << resources[curr] << endl;
 
     return 0;
