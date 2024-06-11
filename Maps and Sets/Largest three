@@ -23,6 +23,5 @@ int main()
         itS++;
     }
 
-
     return 0;
 }
