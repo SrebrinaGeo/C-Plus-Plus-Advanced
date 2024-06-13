@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+const size_t maxSize = 100;
+
+int main()
+{
+    int matrix[maxSize][maxSize] = {};
+
+    int size;
+    cin >> size;
+
+    for (int curRow = 0; curRow < size;curRow++)
+    {
+        for (int curCol = 0; curCol < size; curCol++)
+        {
+            cin >> matrix[curRow][curCol];
+        }
+    }
+
+    int primaryDiagSum = 0;
+    for (int curIdx = 0; curIdx < size; curIdx++) primaryDiagSum += matrix[curIdx][curIdx];
+
+    cout << primaryDiagSum << endl;
+
+    return 0;
+}
