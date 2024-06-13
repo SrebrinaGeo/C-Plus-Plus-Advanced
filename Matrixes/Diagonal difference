@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int size;
+    cin >> size;
+
+    vector< vector<int>> matrix = vector < vector<int>>(size, vector<int>(size));
+
+    for (int curRow = 0; curRow < size; curRow++)
+    {
+        for (int curCol = 0; curCol < size; curCol++) cin >> matrix[curRow][curCol];
+    }
+
+    int primaryDiagSum = 0;
+    int secondaryDiagSum = 0;
+    for (int curIdx = 0; curIdx < size; curIdx++)
+    {
+        primaryDiagSum += matrix[curIdx][curIdx];
+        secondaryDiagSum += matrix[curIdx][size - 1 - curIdx];
+    }
+
+    cout << abs(primaryDiagSum - secondaryDiagSum) << endl;
+
+    return 0;
+}
