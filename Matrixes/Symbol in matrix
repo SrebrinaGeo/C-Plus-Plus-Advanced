@@ -1,0 +1,37 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int size;
+    cin >> size;
+
+    vector< vector<char> > matrix = vector<vector<char>>(size, std::vector<char>(size));
+
+    for (int curRow = 0; curRow < size; curRow++)
+    {
+        for (int curCol = 0; curCol < size; curCol++)
+        {
+            cin >> matrix[curRow][curCol];
+        }
+    }
+
+    char searchedChar;
+    cin >> searchedChar;
+
+    for (int curRow = 0; curRow < size; curRow++)
+    {
+        for (int curCol = 0; curCol < size; curCol++)
+        {
+            if (matrix[curRow][curCol] == searchedChar)
+            {
+                cout << '(' << curRow << ", " << curCol << ')' << endl;
+                return 0;
+            }
+        }
+    }
+
+    cout << searchedChar << " does not occur in the matrix" << endl;
+}
