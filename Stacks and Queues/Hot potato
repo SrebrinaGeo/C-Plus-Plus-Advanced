@@ -16,7 +16,7 @@ int main()
     while (istr >> name) players.push(name);
 
     int moves;
-    cin >> moves;
+    cin >> moves; 
 
     int remainingMoves = moves;
     while (players.size() > 1)
