@@ -1,0 +1,48 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+
+int main()
+{
+    size_t rows, cols;
+    string snake;
+    cin >> rows >> cols >> snake;
+
+    char isle[12][12];
+
+    string::iterator itS = snake.begin();
+    for (size_t curRow = 0; curRow < rows; curRow++)
+    {
+        size_t firstCol, lastCol;
+        int diff;
+        if (curRow % 2) //the row is not pair
+        {
+            firstCol = cols - 1;
+            lastCol = 0;
+            diff = -1;
+        }
+        else
+        {
+            firstCol = 0;
+            lastCol = cols - 1;
+            diff = 1;
+        }
+
+        for (int curCol = firstCol; curCol != (lastCol + diff); curCol += diff)
+        {
+            if (itS == snake.end()) itS = snake.begin();
+            isle[curRow][curCol] = *itS;
+            itS++;
+        }
+    }
+
+    for (size_t curRow = 0; curRow < rows; curRow++)
+    {
+        for (size_t curCol = 0; curCol < cols; curCol++) cout << isle[curRow][curCol];
+        cout << endl;
+    }
+
+    return 0;
+}
