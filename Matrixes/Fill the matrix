@@ -1,0 +1,63 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+
+int main()
+{
+    int N;
+    char alg;
+
+    string input;
+    getline(cin, input, ',');
+    N = stoi(input);
+
+    cin >> alg;
+
+    int counter = 1;
+    int r = 0, c = 0;
+    int direction = 1;
+
+    vector <vector<int>> mat(N, vector<int>(N, 0));
+
+    for (; counter <= N * N; counter++)
+    {
+        mat[r][c] = counter;
+        r += direction;
+
+        if (alg == 'A')
+        {
+            if (r >= N)
+            {
+                r = 0;
+                c++;
+            }
+        }
+        else
+        {
+            if (r < 0 || r >= N)
+            {
+                c++;
+                if (r >= N)
+                {
+                    r = N - 1;
+                }
+                else
+                {
+                    r = 0;
+                }
+                direction = -direction;
+            }
+        }
+    }
+
+    for (int curRow = 0; curRow < N; curRow++)
+    {
+        for (int curCol = 0; curCol < N; curCol++) cout << mat[curRow][curCol] << ' ';
+        cout << endl;
+    }
+    
+
+    return 0;
+}
