@@ -1,0 +1,93 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+struct TeamStats
+{
+    int points = 0;
+    int scoredGoals = 0;
+    int receivedGoals = 0;
+};
+
+int main() 
+{
+    string teamNamesLine;
+    getline(cin, teamNamesLine);
+
+    stringstream ss(teamNamesLine);
+    string teamName;
+    vector<string> teamNames;
+    unordered_map<string, TeamStats> teams;
+
+
+    while (ss >> teamName) 
+    {
+        teamNames.push_back(teamName);
+        teams[teamName] = TeamStats();
+    }
+
+    string matchResult;
+    while (getline(cin, matchResult)) 
+    {
+        if (matchResult == ".") break;
+
+        stringstream resultStream(matchResult);
+        string team1, team2;
+        int score1, score2;
+        resultStream >> team1 >> score1 >> team2 >> score2;
+
+        teams[team1].scoredGoals += score1;
+        teams[team1].receivedGoals += score2;
+        teams[team2].scoredGoals += score2;
+        teams[team2].receivedGoals += score1;
+
+        if (score1 > score2) 
+        {
+            teams[team1].points += 3;
+        }
+        else if (score2 > score1) 
+        {
+            teams[team2].points += 3;
+        }
+        else {
+            teams[team1].points += 1;
+            teams[team2].points += 1;
+        }
+    }
+
+    for (const string& name : teamNames) 
+    {
+        TeamStats& stats = teams[name];
+        cout << name << " - " << stats.points << " - " << stats.scoredGoals << " - " << stats.receivedGoals << endl;
+    }
+
+    int maxPoints = -1;
+    vector<string> topTeams;
+    for (const string& name : teamNames) 
+    {
+        if (teams[name].points > maxPoints) 
+        {
+            maxPoints = teams[name].points;
+            topTeams.clear();
+            topTeams.push_back(name);
+        }
+        else if (teams[name].points == maxPoints) 
+        {
+            topTeams.push_back(name);
+        }
+    }
+
+    cout << "Top team(s) : ";
+    for (size_t i = 0; i < topTeams.size(); ++i) 
+    {
+        cout << topTeams[i];
+        if (i < topTeams.size() - 1) cout << ", ";
+    }
+    cout << endl;
+
+    return 0;
+}
