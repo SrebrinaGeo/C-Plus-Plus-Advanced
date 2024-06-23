@@ -1,0 +1,58 @@
+#include <iostream>
+#include <sstream>
+#include <unordered_map>
+#include <set>
+
+using namespace std;
+
+int main() 
+{
+    string paragraph;
+    getline(cin, paragraph);
+
+    unordered_map<string, int> wordCount;
+    unordered_map<char, int> punctuationCount;
+    set<string> elements;
+
+    set<char> punctuations = { ',', '.', '?', '!' };
+
+    stringstream ss(paragraph);
+    string word;
+
+    while (ss >> word) 
+    {
+        string actualWord;
+        for (char ch : word) 
+        {
+            if (punctuations.count(ch)) 
+            {
+                punctuationCount[ch]++;
+                elements.insert(string(1, ch));
+            }
+            else 
+            {
+                actualWord += ch;
+            }
+        }
+
+        if (!actualWord.empty()) 
+        {
+            wordCount[actualWord]++;
+            elements.insert(actualWord);
+        }
+    }
+
+    for (const auto& element : elements) 
+    {
+        if (element.length() == 1 && punctuations.count(element[0])) 
+        {
+            cout << element << " -> " << punctuationCount[element[0]] << endl;
+        }
+        else 
+        {
+            cout << element << " -> " << wordCount[element] << endl;
+        }
+    }
+
+    return 0;
+}
