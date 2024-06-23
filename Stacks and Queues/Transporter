@@ -1,0 +1,94 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <deque>
+#include <string>
+
+using namespace std;
+
+struct Station 
+{
+    string name;
+    int demand;
+};
+
+int main() 
+{
+    vector<Station> stations;
+    deque<int> pallets;
+    string line;
+
+    while (getline(cin, line) && line != "end") 
+    {
+        stringstream ss(line);
+        string stationName;
+        int demand;
+        ss >> stationName >> demand;
+        stations.push_back({stationName, demand});
+    }
+
+    getline(cin, line);
+    stringstream ss(line);
+    int quantity;
+    while (ss >> quantity) 
+    {
+        pallets.push_back(quantity);
+    }
+
+    int totalPackets = 0;
+    for (int packet : pallets) 
+    {
+        totalPackets += packet;
+    }
+
+    for (const auto& station : stations) 
+    {
+        int demand = station.demand;
+        cout << station.name << " ";
+
+        bool first = true;
+        while (demand > 0 && !pallets.empty()) 
+        {
+            int& lastPallet = pallets.back();
+            int palletIndex = pallets.size() - 1;
+            if (lastPallet <= demand) 
+            {
+                if (!first) cout << " ";
+                cout << palletIndex << ":" << lastPallet;
+                demand -= lastPallet;
+                pallets.pop_back();
+                first = false;
+            }
+            else 
+            {
+                if (!first) cout << " ";
+                cout << palletIndex << ":" << demand;
+                lastPallet -= demand;
+                demand = 0;
+                first = false;
+            }
+        }
+
+        if (demand > 0) 
+        {
+            cout << " Out of Stock!" << endl;
+            cout << "Incomplete: " << demand << endl;
+            return 0;
+        }
+
+        cout << endl;
+    }
+
+    int remainingPackets = 0;
+    for (int packet : pallets) 
+    {
+        remainingPackets += packet;
+    }
+
+    if (remainingPackets > 0) 
+    {
+        cout << "Remaining packs: " << remainingPackets << endl;
+    }
+
+    return 0;
+}
